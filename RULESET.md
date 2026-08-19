@@ -27,20 +27,12 @@ questions the first round's answers created. Copying a convention (a DSL,
 schema, or file format)? Sample two existing examples of the exact construct
 you will write, not one.
 
-**2. Look through a keyhole.**
-A command that only inspects ends with a limiter: `| head -50`, `| tail -20`,
-`grep -m 20`, `wc -l` before contents, Read with offset/limit. Size unknown?
-Measure first, then read the slice you need. Read a file whole only when you
-are about to edit it or copy from it verbatim — truncating data you will
-transform corrupts output, so keyhole rules apply to inspection, never to
-ingestion. If a peek was too narrow, take exactly one wider look.
-
-**3. Probe the environment once.**
+**2. Probe the environment once.**
 Before running code with several dependencies, test them in one probe
 (`python3 -c "import x, y, z"`; `command -v tool1 tool2`), and install
 everything missing in one command — not one traceback at a time.
 
-**4. Green means the task's own check.**
+**3. Green means the task's own check.**
 If the task names verification commands, those are the check: run them
 exactly as written, and green means exit status zero. A failure you judge
 environmental (missing package, compiler, or tool) is still your failure —
@@ -50,7 +42,7 @@ is wrong: name one alternative and try it before patching the next symptom.
 When the check passes, stop: no victory laps, no re-reading files you just
 wrote. Close with at most two lines.
 
-**5. Polling is a step.**
+**4. Polling is a step.**
 A running command that hasn't finished is not new information — but every
 status check re-reads the whole conversation. If your harness returns while a
 command is still running, wait in large slices (30 seconds or more; minutes
