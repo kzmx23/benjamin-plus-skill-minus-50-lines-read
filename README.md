@@ -1,74 +1,76 @@
+<p align="center"><strong>Русский</strong> · <a href="README.en.md">English</a></p>
+
 <p align="center">
-  <img src="assets/benji.png" alt="Benji — the benjamin-plus mascot" width="300">
+  <img src="assets/benji.png" alt="Benji — маскот benjamin-plus" width="300">
 </p>
 
-<p align="center"><em>“Beware of little expenses; a small leak will sink a great ship.”</em><br>— Benjamin Franklin</p>
+<p align="center"><em>«Остерегайтесь мелких трат: маленькая течь топит большой корабль».</em><br>— Бенджамин Франклин</p>
 
 <h1 align="center">benjamin-plus</h1>
 
-<p align="center">A token-efficiency <strong>skill</strong> for coding agents.<br>
-It changes how the agent <strong>looks things up and waits</strong> — never what it builds.<br><br>
-<strong>Measured: up to −18 % cost and −22 % tokens per task, quality unchanged.</strong></p>
+<p align="center"><strong>Skill</strong> для экономии токенов у кодинг-агентов.<br>
+Он меняет то, как агент <strong>ищет информацию и ждёт</strong>, — но не то, что он создаёт.<br><br>
+<strong>Замерено: до −18 % стоимости и −22 % токенов на задачу при неизменном качестве.</strong></p>
 
 ---
 
-## What the skill teaches
+## Чему учит этот skill
 
-An agent pays twice for every clumsy lookup: once for the step itself, and again every time the growing conversation gets re-read. So the skill teaches four habits:
+Агент платит дважды за каждый неаккуратный запрос: один раз за сам шаг и ещё раз каждый раз, когда растущий разговор перечитывается заново. Поэтому skill прививает четыре привычки:
 
-1. **Recon in one pass.** Gather the facts up front in one combined step instead of poking at the repo five separate times. And before copying a format or convention, look at two real examples, not one.
-2. **Probe the environment once.** Check every dependency in one command and install whatever is missing in one go, instead of discovering them one crash at a time.
-3. **Green means the task's own check.** If the task says how to verify, that command is the definition of done. A missing compiler is still the agent's problem to fix, and a check that fails twice means the approach is wrong, not the symptom. When it passes: stop.
-4. **Polling is a step.** A build that hasn't finished has nothing new to say. Check on it every 30 seconds, not every second. On some agent platforms, polling alone turned out to be nearly half of all steps.
+1. **Разведка за один проход.** Собирай факты заранее одним объединённым шагом, а не тыкайся в репозиторий по пять раз подряд. И прежде чем копировать формат или соглашение, посмотри на два реальных примера, а не на один.
+2. **Проверь окружение один раз.** Проверь все зависимости одной командой и установи всё недостающее за один заход, а не выясняй их по одному краху за раз.
+3. **«Зелёно» — это собственная проверка задачи.** Если задача говорит, как проверять, именно эта команда и есть определение готовности. Отсутствующий компилятор — всё равно проблема агента, которую надо чинить, а проверка, падающая дважды, означает, что подход неверен, а не симптом. Прошла — стоп.
+4. **Поллинг — это шаг.** Ещё не завершившаяся сборка не сообщает ничего нового. Проверяй её раз в 30 секунд, а не раз в секунду. На некоторых агентских платформах один только поллинг оказался почти половиной всех шагов.
 
-The skill's full text: [`RULESET.md`](RULESET.md) (~745 tokens injected).
+Полный текст skill'а: [`RULESET.md`](RULESET.md) (~745 токенов при инъекции).
 
-## What to expect
+## Чего ожидать
 
-![Median paired savings across six metrics](assets/savings.svg)
+![Медианная парная экономия по шести метрикам](assets/savings.svg)
 
-![Token consumption by arm](assets/tokens.svg)
+![Потребление токенов по группам](assets/tokens.svg)
 
-- **Quality unchanged.** 7 better / 5 worse / 68 ties (sign p = 0.77); mean verifier reward 0.362 → 0.392. Not powered as an equivalence test — large effects ruled out, small ones not.
-- **Savings scale with baseline bloat.** An identical run a day earlier measured −10.0 % median cost against a leaner-running baseline; the treated arm stayed flat across both days while the control drifted +10.5 %. Expect roughly **−10 % to −18 % cost** depending on how bloated your sessions run.
-- **Cross-platform:** on Java SWE-bench (Codex CLI, gpt-5.6-luna, 675 paired replicas) the hook-injected skill measured **−4.4 % cost [−7.5, −1.5], p = 0.003**, solve rate unchanged (p = 0.22), tool calls −20 %.
-- Medians are the honest unit: a few hard-task tails can give part of the aggregate back.
+- **Качество не изменилось.** 7 лучше / 5 хуже / 68 без изменений (знаковый тест p = 0.77); средняя награда верификатора 0.362 → 0.392. Это не тест на эквивалентность — крупные эффекты исключены, мелкие — нет.
+- **Экономия растёт вместе с раздутостью базового прогона.** Идентичный прогон днём ранее показал −10.0 % медианной стоимости против более экономного базового прогона; обрабатываемая группа оставалась стабильной оба дня, тогда как контроль сдвинулся на +10.5 %. Ожидайте примерно **−10 % … −18 % стоимости** в зависимости от того, насколько раздуты ваши сессии.
+- **Кросс-платформенно:** на Java SWE-bench (Codex CLI, gpt-5.6-luna, 675 парных реплик) внедрённый через хук skill показал **−4.4 % стоимости [−7.5, −1.5], p = 0.003**, доля решённых задач без изменений (p = 0.22), вызовов инструментов −20 %.
+- Медианы — честная единица измерения: хвост из нескольких трудных задач может вернуть часть агрегированной экономии.
 
-## Install — inject it, don't "install" it
+## Установка — внедряйте (inject), а не «устанавливайте»
 
-Same skill, two delivery methods, tested head-to-head: **injected, it saves** (−17.9 % cost median on the charts above; −4.4 % even on the harder Java/Codex setup) — **as a discoverable skill folder, it saves nothing** (−0.5 %, n.s.; agents burned steps just finding SKILL.md). So: inject.
+Один и тот же skill, два способа доставки, протестированные лоб в лоб: **при внедрении он экономит** (−17.9 % медианной стоимости на графиках выше; −4.4 % даже на более сложной связке Java/Codex) — **как обнаруживаемая папка-skill он не экономит ничего** (−0.5 %, статистически незначимо; агенты тратили шаги просто на поиск SKILL.md). Поэтому: внедряйте.
 
 ```bash
 git clone https://github.com/JetBrains/benjamin-plus-skill ~/.benjamin-plus
 ```
 
-**Claude Code** — add to `~/.claude/settings.json` (verify with `/hooks`, or just ask Claude Code to add it):
+**Claude Code** — добавьте в `~/.claude/settings.json` (проверьте через `/hooks` или просто попросите Claude Code добавить это):
 
 ```json
 { "hooks": { "SessionStart": [ { "matcher": "startup|resume|clear|compact",
   "hooks": [ { "type": "command", "command": "cat ~/.benjamin-plus/injected-instruction.md" } ] } ] } }
 ```
 
-…or per-project, zero config: `cat ~/.benjamin-plus/injected-instruction.md >> CLAUDE.md`
+…или для отдельного проекта, без настройки: `cat ~/.benjamin-plus/injected-instruction.md >> CLAUDE.md`
 
-**Codex CLI** — AGENTS.md is loaded into every session; no hook needed:
+**Codex CLI** — AGENTS.md загружается в каждую сессию; хук не нужен:
 
 ```bash
-cat ~/.benjamin-plus/injected-instruction.md >> ~/.codex/AGENTS.md   # or >> AGENTS.md in a repo
+cat ~/.benjamin-plus/injected-instruction.md >> ~/.codex/AGENTS.md   # или >> AGENTS.md внутри репозитория
 ```
 
-**Any other agent** — append `injected-instruction.md` to the system prompt. That's the whole integration (~3 KB).
+**Любой другой агент** — добавьте `injected-instruction.md` в системный промпт. Это и есть вся интеграция (~3 КБ).
 
-## How it was measured
+## Как это измерялось
 
-This skill wasn't written once and shipped. It came out of **auto research**: an agent working in a loop against the benchmark. Mine ~1,200 old agent traces for where the money actually goes, draft rules, run a paired A/B, read the failing trajectories, revise, run again. Six versions later, only the rules that survived the evidence were left. Everything that traded quality for savings got deleted along the way, which turned out to be most of the clever ideas.
+Этот skill не был написан один раз и выпущен. Он вышел из **авто-исследования**: агент работал в цикле против бенчмарка. Прошерсти ~1200 старых трасс агента на предмет того, куда реально уходят деньги, набросай правила, проведи парный A/B, прочитай проваленные траектории, доработай, запусти снова. Шесть версий спустя остались только правила, пережившие проверку данными. Всё, что меняло качество на экономию, по пути было удалено — а это оказалось большинством умных идей.
 
-The measurement itself is a paired A/B. Same agent, same model, same tasks, same container images; the only difference between the arms is the injected skill text. 80 paired SkillsBench tasks (Claude Code 2.1.201 in Docker sandboxes, Sonnet 5, low effort), Wilcoxon on the paired deltas, a sign test on rewards, and a per-trial adoption check: the payload reached the model in 80 of 80 treated runs and 0 of 80 controls. Trials that failed on one side only were retried before anything was counted. Every number and caveat lives in [`EXPECTED-RESULTS.md`](EXPECTED-RESULTS.md).
+Само измерение — парный A/B. Один и тот же агент, одна и та же модель, одни и те же задачи, одни и те же образы контейнеров; единственное различие между группами — внедрённый текст skill'а. 80 парных задач SkillsBench (Claude Code 2.1.201 в Docker-песочницах, Sonnet 5, низкий effort), критерий Уилкоксона по парным дельтам, знаковый тест по наградам и попробная проверка внедрения: полезная нагрузка дошла до модели в 80 из 80 обрабатываемых прогонов и в 0 из 80 контрольных. Прогоны, упавшие только с одной стороны, повторялись до того, как что-либо засчитывалось. Каждая цифра и оговорка — в [`EXPECTED-RESULTS.md`](EXPECTED-RESULTS.md).
 
-## Feedback
+## Обратная связь
 
-Found a regression, a workload where it loses money, or a rule that misfires on your stack? [Open an issue](../../issues) — ideally with the paired numbers (with/without) and, if you can, a trace. Results from other benchmarks and harnesses are especially welcome; that's how v6 got its polling rule.
+Нашли регрессию, нагрузку, на которой он теряет деньги, или правило, которое даёт осечку на вашем стеке? [Откройте issue](../../issues) — в идеале с парными цифрами (с/без) и, если можете, с трассой. Результаты с других бенчмарков и харнесов особенно приветствуются; именно так v6 получила своё правило про поллинг.
 
-## License
+## Лицензия
 
 MIT.
